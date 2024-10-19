@@ -1,18 +1,17 @@
-import PostList from 'pages/PostList.vue'
+import LessonList from 'src/pages/LessonList.vue'
 
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '/lessons', component: LessonList },
+      // { path: '/lessons/new', component: LessonNew },
+      // { path: '/lessons/:id/edit', component: LessonEdit },
+      // { path: '/lessons/:id/delete', component: LessonDelete },
     ]
   },
-
-  { path: '/posts', component: PostList },
-  // { path: '/posts/new', component: PostNew },
-  // { path: '/posts/:id/edit', component: PostEdit },
-  // { path: '/posts/:id/delete', component: PostDelete },
 
   // Always leave this as last one,
   // but you can also remove it
