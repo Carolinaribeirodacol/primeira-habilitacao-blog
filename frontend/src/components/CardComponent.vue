@@ -21,6 +21,7 @@ defineOptions({
 });
 
 const props = defineProps({
+  id: Number,
   image: {
     type: String,
     default: ""
@@ -37,14 +38,15 @@ const props = defineProps({
     type: String,
     default: ""
   },
+  onClick: Function
 });
 
 const handleClick = () => {
-  // todo
+  props.onClick(props.id);
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .card {
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;

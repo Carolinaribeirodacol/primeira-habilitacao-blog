@@ -1,3 +1,4 @@
+import LessonForm from 'src/pages/LessonForm.vue'
 import LessonList from 'src/pages/LessonList.vue'
 
 const routes = [
@@ -8,7 +9,7 @@ const routes = [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/lessons', component: LessonList },
       // { path: '/lessons/new', component: LessonNew },
-      // { path: '/lessons/:id/edit', component: LessonEdit },
+      { path: '/lessons/:id/edit', component: LessonForm, name: "LessonEdit", props: true },
       // { path: '/lessons/:id/delete', component: LessonDelete },
     ]
   },
