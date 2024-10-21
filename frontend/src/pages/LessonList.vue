@@ -15,6 +15,7 @@
         :category="lesson.category"
         :description="lesson.description"
         :onEdit="goToEditLessonPage"
+        :onDelete="deleteCard"
         :onClick="goToViewPage"
         class="lessons__card"
       />
@@ -23,6 +24,7 @@
 </template>
 
 <script setup>
+import { Notify } from 'quasar';
 import { useLessonStore } from 'src/stores/lessonStore';
 import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -36,7 +38,7 @@ const lessonStore = useLessonStore();
 const lessons = computed(() => lessonStore.lessons);
 
 onMounted(() => {
-  lessonStore.fetchLessons();
+  lessonStore.getLessons();
 });
 
 const router = useRouter();
@@ -51,6 +53,24 @@ const goToViewPage = (id) => {
 
 const goToCreatePage = () => {
   router.push(`/lessons/new`);
+}
+
+const deleteCard = async (id) => {
+    try {
+      await lessonStore.deleteLesson(id);
+
+      Notify.create({
+        type: 'positive',
+        message: 'Lição deletada com sucesso!',
+        position: 'top-right'
+      });
+    } catch(error) {
+      Notify.create({
+        type: 'negative',
+        message: 'Não foi possível deletar a lição!',
+        position: 'top-right'
+      });
+    }
 }
 </script>
 
@@ -83,7 +103,6 @@ const goToCreatePage = () => {
       min-width: 200px;
       min-height: 300px;
       box-sizing: border-box;
-      padding: 1rem;
     }
   }
 </style>

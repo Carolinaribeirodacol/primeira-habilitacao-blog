@@ -1,45 +1,31 @@
 {
   "lessons": [
     {
-      "title": "teste",
-      "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png",
-      "category": "primeiros socorros",
-      "description": "dsdsd",
-      "id": "1"
-    },
-    {
       "id": "2",
-      "title": "legislação de trânsito",
+      "title": "Interpretação CTB",
       "description": "Ser maior de 18. Ser penalmente imputável → ter passado pelas avaliações psicológicas e médica. Possuir documento de identidade e CPF",
-      "category": "aula 2",
+      "category": "legislação de trânsito",
       "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png"
     },
     {
       "id": "3",
-      "title": "legislação de trânsito",
+      "title": "Sistema nacional de trânsito",
       "description": "Ser maior de 18. Ser penalmente imputável → ter passado pelas avaliações psicológicas e médica. Possuir documento de identidade e CPF",
-      "category": "aula 3",
+      "category": "legislação de trânsito",
       "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png"
     },
     {
       "id": "4",
-      "title": "legislação de trânsito",
+      "title": "Direitos e deveres do cidadão",
       "description": "Ser maior de 18. Ser penalmente imputável → ter passado pelas avaliações psicológicas e médica. Possuir documento de identidade e CPF",
-      "category": "aula 4",
+      "category": "legislação de trânsito",
       "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png"
     },
     {
       "id": "5",
-      "title": "legislação de trânsito",
+      "title": "Processo de habilitação",
       "description": "Ser maior de 18. Ser penalmente imputável → ter passado pelas avaliações psicológicas e médica. Possuir documento de identidade e CPF",
-      "category": "aula 5",
-      "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png"
-    },
-    {
-      "id": "6",
-      "title": "legislação de trânsito",
-      "description": "Ser maior de 18. Ser penalmente imputável → ter passado pelas avaliações psicológicas e médica. Possuir documento de identidade e CPF",
-      "category": "aula 6",
+      "category": "legislação de trânsito",
       "image": "https://simuladodetransp.com.br/wp-content/uploads/2019/01/Requisitos-necess%C3%A1rios-para-a-primeira-habilita%C3%A7%C3%A3o-cnh.png"
     }
   ]

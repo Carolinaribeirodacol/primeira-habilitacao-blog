@@ -15,6 +15,7 @@
 </template>
 
 <script setup>
+import { Notify } from 'quasar';
 import { useLessonStore } from 'src/stores/lessonStore';
 import { computed, ref } from 'vue';
 
@@ -46,11 +47,25 @@ import { computed, ref } from 'vue';
     }
   }
 
-  const handleSubmit = () => {
-    if (isEditMode.value) {
-      lessonStore.updateLesson(props.id, form.value);
-    } else {
-      lessonStore.createLesson(form.value);
+  const handleSubmit = async () => {
+    try {
+      if (isEditMode.value) {
+        await lessonStore.updateLesson(props.id, form.value);
+      } else {
+        await lessonStore.createLesson(form.value);
+      }
+
+      Notify.create({
+        type: 'positive',
+        message: isEditMode.value ? 'Lição atualizada com sucesso!' : 'Lição criada com sucesso!',
+        position: 'top-right'
+      });
+    } catch(error) {
+      Notify.create({
+        type: 'negative',
+        message: isEditMode.value ? 'Não foi possível atualizar a lição!' : 'Não foi possível criar a lição!',
+        position: 'top-right'
+      });
     }
   };
 </script>

@@ -1,24 +1,25 @@
 <template>
-  <q-card class="card" flat>
-    <div class="card__actions">
-      <q-btn @click="handleDeleteClick" flat color="negative" icon="delete" padding="xs" />
-      <q-btn @click="handleEditClick" flat color="primary" icon="edit" padding="xs" />
-    </div>
-    <div @click="handleClick">
-      <q-img
-        class="card__image"
-        :src="image"
-        alt="card-image"
-      />
-      <q-card-section class="card__header">
-        <span class="card__category">{{ category }}</span>
-        <span class="card__title">{{ title }}</span>
-      </q-card-section>
-      <q-card-section class="card__description">
+  <div class="card" flat>
+    <div @click="handleClick" class="card__content">
+      <div class="card__actions">
+        <q-btn @click="handleDeleteClick" flat color="negative" icon="delete" padding="xs" size="sm" />
+        <q-btn @click="handleEditClick" flat color="primary" icon="edit" padding="xs" size="sm" />
+      </div>
+
+      <q-img class="card__image" :src="image" alt="card-image" />
+
+      <div class="card__title">{{ title }}</div>
+      <p class="card__description">
         {{ description }}
-      </q-card-section>
+      </p>
+
+      <div>
+        <q-badge outline class="card__badge" color="blue">
+          {{ category }}
+        </q-badge>
+      </div>
     </div>
-  </q-card>
+  </div>
 </template>
 
 <script setup>
@@ -45,11 +46,18 @@ const props = defineProps({
     default: ""
   },
   onEdit: Function,
+  onDelete: Function,
   onClick: Function
 });
 
-const handleEditClick = () => {
+const handleEditClick = (event) => {
+  event.stopPropagation();
   props.onEdit(props.id);
+};
+
+const handleDeleteClick = (event) => {
+  event.stopPropagation();
+  props.onDelete(props.id);
 };
 
 const handleClick = () => {
@@ -62,50 +70,48 @@ const handleClick = () => {
   transition: transform 0.3s, box-shadow 0.3s;
   border-radius: 1rem;
   border: 1px solid #151F30;
+  cursor: pointer;
+  padding: 0.8rem;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   }
 
-  &__image {
-    width: 100%;
-    margin-bottom: 1rem;
-    border-radius: 0 !important;
-    height: 110px;
-  }
-
-  &__header {
+  &__content {
     display: flex;
     flex-direction: column;
-    padding: 0;
-    margin-bottom: 0.25rem;
-  }
-
-  &__category {
-    font-weight: 800;
-    color: #FF7A48;
-    margin-bottom: 0.25rem;
-  }
-
-  &__title {
-    font-weight: bold;
-    color: #151F30;
-  }
-
-  &__description {
-    color: gray;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    padding: 0;
+    justify-content: space-between;
+    height: 100%;
   }
 
   &__actions {
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 0.5rem;
+    height: 120px;
+  }
+
+  &__title {
+    font-weight: bold;
+    color: #151F30;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__description {
+    font-size: 0.6rem;
+    height: 40px;
+    color: gray;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 }
 </style>

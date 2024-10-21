@@ -11,19 +11,10 @@ export const useLessonStore = defineStore('lesson', {
   },
 
   actions: {
-    async fetchLessons() {
+    async getLessons() {
       const { data } = await axios.get('http://localhost:3000/lessons')
       // console.log('chamou', data);
       this.lessons = data
-    },
-
-    async fetchLessonById(id) {
-      try {
-        const { data } = await axios.get(`http://localhost:3000/lessons/${id}`);
-        return data;
-      } catch (error) {
-        console.error('Error fetching lesson:', error);
-      }
     },
 
     async createLesson(lessonData) {
@@ -32,6 +23,7 @@ export const useLessonStore = defineStore('lesson', {
         this.lessons.push(data);
       } catch (error) {
         console.error('Error creating lesson:', error);
+        throw error;
       }
     },
 
@@ -44,6 +36,7 @@ export const useLessonStore = defineStore('lesson', {
         }
       } catch (error) {
         console.error('Error updating lesson:', error);
+        throw error;
       }
     },
 
@@ -53,6 +46,7 @@ export const useLessonStore = defineStore('lesson', {
         this.lessons = this.lessons.filter(lesson => lesson.id !== id);
       } catch (error) {
         console.error('Error deleting lesson:', error);
+        throw error;
       }
     }
   }
