@@ -1,4 +1,6 @@
+import LessonForm from 'src/pages/LessonForm.vue'
 import LessonList from 'src/pages/LessonList.vue'
+import LessonView from 'src/pages/LessonView.vue'
 
 const routes = [
   {
@@ -7,9 +9,9 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/lessons', component: LessonList },
-      // { path: '/lessons/new', component: LessonNew },
-      // { path: '/lessons/:id/edit', component: LessonEdit },
-      // { path: '/lessons/:id/delete', component: LessonDelete },
+      { path: '/lessons/:id/edit', component: LessonForm, name: "LessonEdit", props: true },
+      { path: '/lessons/new', component: LessonForm, name: "LessonNew" },
+      { path: '/lessons/:id/view', component: LessonView },
     ]
   },
 
