@@ -1,6 +1,9 @@
 <template>
   <q-page class="lessons">
-    <h3 class="lessons__title">Todas as aulas</h3>
+    <div class="lessons__header">
+      <h3 class="lessons__title">Todas as aulas</h3>
+      <q-btn :onClick="goToCreatePage" label="Criar" type="submit" color="positive" />
+    </div>
 
     <div class="lessons__cards">
       <card-component
@@ -11,7 +14,8 @@
         :title="lesson.title"
         :category="lesson.category"
         :description="lesson.description"
-        :onClick="goToEditLessonPage"
+        :onEdit="goToEditLessonPage"
+        :onClick="goToViewPage"
         class="lessons__card"
       />
     </div>
@@ -28,23 +32,37 @@ defineOptions({
   name: 'LessonList'
 });
 
-const lessonStore = useLessonStore()
-const lessons = computed(() => lessonStore.lessons)
+const lessonStore = useLessonStore();
+const lessons = computed(() => lessonStore.lessons);
 
 onMounted(() => {
-  lessonStore.fetchLessons()
-})
+  lessonStore.fetchLessons();
+});
 
 const router = useRouter();
 
 const goToEditLessonPage = (id) => {
   router.push(`/lessons/${id}/edit`);
+};
+
+const goToViewPage = (id) => {
+  router.push(`/lessons/${id}/view`);
+}
+
+const goToCreatePage = () => {
+  router.push(`/lessons/new`);
 }
 </script>
 
 <style lang="scss" scoped>
   .lessons {
     padding: 1rem;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     &__title {
       font-size: 1.5rem;
@@ -54,6 +72,7 @@ const goToEditLessonPage = (id) => {
 
     &__cards {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
     }
