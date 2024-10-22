@@ -6,7 +6,7 @@
     </div>
 
     <div class="lessons__cards">
-      <card-component
+      <lesson-card
         v-for="lesson in lessons"
         :key="lesson.id"
         :id="lesson.id"
@@ -31,7 +31,7 @@ import { useDialogStore } from 'src/stores/dialogStore';
 import { useLessonStore } from 'src/stores/lessonStore';
 import { computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import CardComponent from '../components/CardComponent.vue';
+import LessonCard from '../components/LessonCard.vue';
 import QaDialog from '../components/QaDialog.vue';
 
 defineOptions({
@@ -93,6 +93,7 @@ defineOptions({
 
 <style lang="scss" scoped>
   .lessons {
+
     &__header {
       display: flex;
       align-items: center;

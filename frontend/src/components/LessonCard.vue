@@ -24,7 +24,7 @@
 
 <script setup>
 defineOptions({
-  name: 'CardComponent'
+  name: 'LessonCard'
 });
 
 const props = defineProps({
