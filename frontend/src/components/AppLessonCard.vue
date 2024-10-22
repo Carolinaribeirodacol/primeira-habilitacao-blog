@@ -24,7 +24,7 @@
 
 <script setup>
 defineOptions({
-  name: 'LessonCard'
+  name: 'AppLessonCard'
 });
 
 const props = defineProps({

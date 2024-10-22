@@ -37,7 +37,7 @@ defineOptions({
 
 <style lang="scss" scoped>
   .home {
-    .home__image {
+    &__image {
       display: flex;
       justify-content: center;
     }

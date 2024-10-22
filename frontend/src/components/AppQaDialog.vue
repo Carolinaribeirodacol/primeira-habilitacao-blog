@@ -17,9 +17,9 @@
 <script setup>
 import { useDialogStore } from 'src/stores/dialogStore';
 
-  defineOptions({
-    name: 'QaDialog'
-  });
+defineOptions({
+  name: 'AppQaDialog'
+});
 
-  const dialogStore = useDialogStore();
+const dialogStore = useDialogStore();
 </script>

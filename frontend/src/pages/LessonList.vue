@@ -6,7 +6,7 @@
     </div>
 
     <div class="lessons__cards">
-      <lesson-card
+      <app-lesson-card
         v-for="lesson in lessons"
         :key="lesson.id"
         :id="lesson.id"
@@ -21,7 +21,7 @@
       />
     </div>
 
-    <QaDialog />
+    <AppQaDialog />
   </q-page>
 </template>
 
@@ -31,64 +31,64 @@ import { useDialogStore } from 'src/stores/dialogStore';
 import { useLessonStore } from 'src/stores/lessonStore';
 import { computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import LessonCard from '../components/LessonCard.vue';
-import QaDialog from '../components/QaDialog.vue';
+import AppLessonCard from '../components/AppLessonCard.vue';
+import AppQaDialog from '../components/AppQaDialog.vue';
 
 defineOptions({
   name: 'LessonList'
 });
 
-  const lessonStore = useLessonStore();
-  const lessons = computed(() => lessonStore.lessons);
+const lessonStore = useLessonStore();
+const lessons = computed(() => lessonStore.lessons);
 
-  onMounted(() => {
-    lessonStore.getLessons();
-  });
+onMounted(() => {
+  lessonStore.getLessons();
+});
 
-  const router = useRouter();
+const router = useRouter();
 
-  const goToEditLessonPage = (id) => {
-    router.push(`/lessons/${id}/edit`);
-  };
+const goToEditLessonPage = (id) => {
+  router.push(`/lessons/${id}/edit`);
+};
 
-  const goToViewPage = (id) => {
-    router.push(`/lessons/${id}/view`);
-  }
+const goToViewPage = (id) => {
+  router.push(`/lessons/${id}/view`);
+}
 
-  const goToCreatePage = () => {
-    router.push(`/lessons/new`);
-  }
+const goToCreatePage = () => {
+  router.push(`/lessons/new`);
+}
 
-  const dialogStore = useDialogStore();
+const dialogStore = useDialogStore();
 
-  const deleteCard = (id) => {
-    dialogStore.openDialog();
+const deleteCard = (id) => {
+  dialogStore.openDialog();
 
-    watch(
-      () => dialogStore.confirmed,
-      async (confirmed) => {
-        if (confirmed) {
-          try {
-            await lessonStore.deleteLesson(id);
+  watch(
+    () => dialogStore.confirmed,
+    async (confirmed) => {
+      if (confirmed) {
+        try {
+          await lessonStore.deleteLesson(id);
 
-            Notify.create({
-              type: 'positive',
-              message: 'Lição deletada com sucesso!',
-              position: 'top-right'
-            });
-          } catch (error) {
-            console.log(error);
-            Notify.create({
-              type: 'negative',
-              message: 'Não foi possível deletar a lição!',
-              position: 'top-right'
-            });
-          }
+          Notify.create({
+            type: 'positive',
+            message: 'Lição deletada com sucesso!',
+            position: 'top-right'
+          });
+        } catch (error) {
+          console.log(error);
+          Notify.create({
+            type: 'negative',
+            message: 'Não foi possível deletar a lição!',
+            position: 'top-right'
+          });
         }
-      },
-      { immediate: false }
-    );
-  }
+      }
+    },
+    { immediate: false }
+  );
+}
 </script>
 
 <style lang="scss" scoped>
