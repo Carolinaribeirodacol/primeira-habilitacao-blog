@@ -1,8 +1,8 @@
 <template>
-  <q-page class="lessons">
+  <q-page padding class="lessons">
     <div class="lessons__header">
       <h3 class="lessons__title">Todas as aulas</h3>
-      <q-btn :onClick="goToCreatePage" label="Criar" type="submit" color="positive" />
+      <q-btn :onClick="goToCreatePage" icon="add" label="Nova aula" flat type="submit" color="positive" />
     </div>
 
     <div class="lessons__cards">
@@ -93,8 +93,6 @@ defineOptions({
 
 <style lang="scss" scoped>
   .lessons {
-    padding: 1rem;
-
     &__header {
       display: flex;
       align-items: center;

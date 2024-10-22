@@ -1,18 +1,20 @@
 <template>
-  <div class="lesson" v-if="lesson">
+  <q-page class="lesson" v-if="lesson">
     <q-img
       class="lesson__image"
       :src="lesson.image"
       alt="lesson-image"
     />
     <div class="lesson__content">
-      <h3 class="lesson__title">{{ lesson.title }}</h3>
-      <span class="lesson__category">{{ lesson.category }}</span>
+      <h1 class="lesson__title">{{ lesson.title }}</h1>
       <p>
         {{ lesson.description }}
       </p>
+      <q-badge outline class="lesson__badge" color="blue">
+        {{ lesson.category }}
+      </q-badge>
     </div>
-  </div>
+  </q-page>
   <div v-else>
     Carregando aula...
   </div>
@@ -55,12 +57,12 @@ import { useRoute } from 'vue-router';
       font-size: 1.5rem;
       font-weight: 600;
       color: #103778;
+      margin: 0;
     }
 
-    &__category {
-      font-weight: 800;
-      color: #FF7A48;
-      margin-bottom: 0.25rem;
+    &__badge {
+      margin-top: auto;
+      align-self: flex-start;
     }
   }
 </style>

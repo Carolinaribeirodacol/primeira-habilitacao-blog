@@ -1,3 +1,4 @@
+import ContactPage from 'src/pages/ContactPage.vue'
 import LessonForm from 'src/pages/LessonForm.vue'
 import LessonList from 'src/pages/LessonList.vue'
 import LessonView from 'src/pages/LessonView.vue'
@@ -12,6 +13,7 @@ const routes = [
       { path: '/lessons/:id/edit', component: LessonForm, name: "LessonEdit", props: true },
       { path: '/lessons/new', component: LessonForm, name: "LessonNew" },
       { path: '/lessons/:id/view', component: LessonView },
+      { path: '/contact', component: ContactPage },
     ]
   },
 
