@@ -25,6 +25,7 @@
 import { Notify } from 'quasar';
 import { useLessonStore } from 'src/stores/lessonStore';
 import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
   defineOptions({
     name: 'LessonForm'
@@ -35,6 +36,7 @@ import { computed, ref } from 'vue';
   })
 
   const lessonStore = useLessonStore();
+  const router = useRouter();
 
   const form = ref({
     title: '',
@@ -78,6 +80,8 @@ import { computed, ref } from 'vue';
         message: isEditMode.value ? 'Lição atualizada com sucesso!' : 'Lição criada com sucesso!',
         position: 'top-right'
       });
+
+      router.push('/lessons');
     } catch(error) {
       Notify.create({
         type: 'negative',
