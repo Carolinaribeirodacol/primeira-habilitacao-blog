@@ -1,12 +1,12 @@
 <template>
-  <q-page class="lessons">
+  <q-page padding class="lessons">
     <div class="lessons__header">
       <h3 class="lessons__title">Todas as aulas</h3>
-      <q-btn :onClick="goToCreatePage" label="Criar" type="submit" color="positive" />
+      <q-btn :onClick="goToCreatePage" icon="add" label="Nova aula" flat type="submit" color="positive" />
     </div>
 
     <div class="lessons__cards">
-      <card-component
+      <app-lesson-card
         v-for="lesson in lessons"
         :key="lesson.id"
         :id="lesson.id"
@@ -15,48 +15,84 @@
         :category="lesson.category"
         :description="lesson.description"
         :onEdit="goToEditLessonPage"
+        :onDelete="() => deleteCard(lesson.id)"
         :onClick="goToViewPage"
         class="lessons__card"
       />
     </div>
+
+    <AppQaDialog />
   </q-page>
 </template>
 
 <script setup>
-import { useLessonStore } from 'src/stores/lessonStore';
-import { computed, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import CardComponent from '../components/CardComponent.vue';
+import { Notify } from 'quasar'
+import { useDialogStore } from 'src/stores/dialogStore'
+import { useLessonStore } from 'src/stores/lessonStore'
+import { computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import AppLessonCard from '../components/AppLessonCard.vue'
+import AppQaDialog from '../components/AppQaDialog.vue'
 
 defineOptions({
   name: 'LessonList'
-});
+})
 
-const lessonStore = useLessonStore();
-const lessons = computed(() => lessonStore.lessons);
+const lessonStore = useLessonStore()
+const lessons = computed(() => lessonStore.lessons)
 
 onMounted(() => {
-  lessonStore.fetchLessons();
-});
+  lessonStore.getLessons()
+})
 
-const router = useRouter();
+const router = useRouter()
 
 const goToEditLessonPage = (id) => {
-  router.push(`/lessons/${id}/edit`);
-};
+  router.push(`/lessons/${id}/edit`)
+}
 
 const goToViewPage = (id) => {
-  router.push(`/lessons/${id}/view`);
+  router.push(`/lessons/${id}/view`)
 }
 
 const goToCreatePage = () => {
-  router.push(`/lessons/new`);
+  router.push('/lessons/new')
+}
+
+const dialogStore = useDialogStore()
+
+const deleteCard = (id) => {
+  dialogStore.openDialog()
+
+  watch(
+    () => dialogStore.confirmed,
+    async (confirmed) => {
+      if (confirmed) {
+        try {
+          await lessonStore.deleteLesson(id)
+
+          Notify.create({
+            type: 'positive',
+            message: 'Lição deletada com sucesso!',
+            position: 'top-right'
+          })
+        } catch (error) {
+          console.log(error)
+          Notify.create({
+            type: 'negative',
+            message: 'Não foi possível deletar a lição!',
+            position: 'top-right'
+          })
+        }
+      }
+    },
+    { immediate: false }
+  )
 }
 </script>
 
 <style lang="scss" scoped>
   .lessons {
-    padding: 1rem;
 
     &__header {
       display: flex;
@@ -83,7 +119,6 @@ const goToCreatePage = () => {
       min-width: 200px;
       min-height: 300px;
       box-sizing: border-box;
-      padding: 1rem;
     }
   }
 </style>
