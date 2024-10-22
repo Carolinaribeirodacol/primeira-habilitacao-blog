@@ -15,11 +15,11 @@
 </template>
 
 <script setup>
-import { useDialogStore } from 'src/stores/dialogStore';
+import { useDialogStore } from 'src/stores/dialogStore'
 
 defineOptions({
   name: 'AppQaDialog'
-});
+})
 
-const dialogStore = useDialogStore();
+const dialogStore = useDialogStore()
 </script>

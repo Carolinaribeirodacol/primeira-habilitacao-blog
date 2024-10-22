@@ -21,25 +21,25 @@
 </template>
 
 <script setup>
-import { useLessonStore } from 'src/stores/lessonStore';
-import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useLessonStore } from 'src/stores/lessonStore'
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 defineOptions({
   name: 'LessonView'
-});
+})
 
-const route = useRoute();
-const lessonStore = useLessonStore();
+const route = useRoute()
+const lessonStore = useLessonStore()
 
-const lessonId = computed(() => route.params.id);
-const lesson = computed(() => lessonStore.getLessonById(lessonId.value));
+const lessonId = computed(() => route.params.id)
+const lesson = computed(() => lessonStore.getLessonById(lessonId.value))
 
 onMounted(() => {
   if (!lesson.value) {
-    lessonStore.fetchLessonById(lessonId.value);
+    lessonStore.fetchLessonById(lessonId.value)
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>

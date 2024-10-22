@@ -1,24 +1,24 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useDialogStore = defineStore('dialogStore', () => {
-  const handleOpenDialog = ref(false);
-  const confirmed = ref(false);
+  const handleOpenDialog = ref(false)
+  const confirmed = ref(false)
 
   const openDialog = () => {
-    handleOpenDialog.value = true;
-    confirmed.value = false;
-  };
+    handleOpenDialog.value = true
+    confirmed.value = false
+  }
 
   const confirmAction = () => {
-    confirmed.value = true;
-    handleOpenDialog.value = false;
-  };
+    confirmed.value = true
+    handleOpenDialog.value = false
+  }
 
   const cancelAction = () => {
-    confirmed.value = false;
-    handleOpenDialog.value = false;
-  };
+    confirmed.value = false
+    handleOpenDialog.value = false
+  }
 
   return {
     handleOpenDialog,
@@ -26,5 +26,5 @@ export const useDialogStore = defineStore('dialogStore', () => {
     openDialog,
     confirmAction,
     cancelAction
-  };
-});
+  }
+})

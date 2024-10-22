@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 export default route(function () {
   const Router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes
   })
 
   return Router

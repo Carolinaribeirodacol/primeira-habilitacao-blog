@@ -26,68 +26,68 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar';
-import { useDialogStore } from 'src/stores/dialogStore';
-import { useLessonStore } from 'src/stores/lessonStore';
-import { computed, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
-import AppLessonCard from '../components/AppLessonCard.vue';
-import AppQaDialog from '../components/AppQaDialog.vue';
+import { Notify } from 'quasar'
+import { useDialogStore } from 'src/stores/dialogStore'
+import { useLessonStore } from 'src/stores/lessonStore'
+import { computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import AppLessonCard from '../components/AppLessonCard.vue'
+import AppQaDialog from '../components/AppQaDialog.vue'
 
 defineOptions({
   name: 'LessonList'
-});
+})
 
-const lessonStore = useLessonStore();
-const lessons = computed(() => lessonStore.lessons);
+const lessonStore = useLessonStore()
+const lessons = computed(() => lessonStore.lessons)
 
 onMounted(() => {
-  lessonStore.getLessons();
-});
+  lessonStore.getLessons()
+})
 
-const router = useRouter();
+const router = useRouter()
 
 const goToEditLessonPage = (id) => {
-  router.push(`/lessons/${id}/edit`);
-};
+  router.push(`/lessons/${id}/edit`)
+}
 
 const goToViewPage = (id) => {
-  router.push(`/lessons/${id}/view`);
+  router.push(`/lessons/${id}/view`)
 }
 
 const goToCreatePage = () => {
-  router.push(`/lessons/new`);
+  router.push('/lessons/new')
 }
 
-const dialogStore = useDialogStore();
+const dialogStore = useDialogStore()
 
 const deleteCard = (id) => {
-  dialogStore.openDialog();
+  dialogStore.openDialog()
 
   watch(
     () => dialogStore.confirmed,
     async (confirmed) => {
       if (confirmed) {
         try {
-          await lessonStore.deleteLesson(id);
+          await lessonStore.deleteLesson(id)
 
           Notify.create({
             type: 'positive',
             message: 'Lição deletada com sucesso!',
             position: 'top-right'
-          });
+          })
         } catch (error) {
-          console.log(error);
+          console.log(error)
           Notify.create({
             type: 'negative',
             message: 'Não foi possível deletar a lição!',
             position: 'top-right'
-          });
+          })
         }
       }
     },
     { immediate: false }
-  );
+  )
 }
 </script>
 

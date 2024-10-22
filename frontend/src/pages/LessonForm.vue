@@ -22,74 +22,74 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar';
-import { useLessonStore } from 'src/stores/lessonStore';
-import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { Notify } from 'quasar'
+import { useLessonStore } from 'src/stores/lessonStore'
+import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 defineOptions({
   name: 'LessonForm'
-});
+})
 
 const props = defineProps({
   id: Number
 })
 
-const lessonStore = useLessonStore();
-const router = useRouter();
+const lessonStore = useLessonStore()
+const router = useRouter()
 
 const form = ref({
   title: '',
   image: '',
   category: '',
   description: ''
-});
+})
 
-const categories = ref(['legislação de trânsito', 'direção defensiva', 'primeiros socorros']);
+const categories = ref(['legislação de trânsito', 'direção defensiva', 'primeiros socorros'])
 
 const handleFileUpload = (files) => {
-  const file = files[0];
+  const file = files[0]
 
   // nativo do javascript -> lê o conteúdo do arquivo para salvar como url
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
+  const reader = new FileReader()
+  reader.readAsDataURL(file)
   reader.onload = () => {
-    form.value.image = reader.result;
-  };
-};
+    form.value.image = reader.result
+  }
+}
 
-const isEditMode = computed(() => !!props.id);
+const isEditMode = computed(() => !!props.id)
 
 if (isEditMode.value) {
-  const lesson = lessonStore.getLessonById(props.id);
+  const lesson = lessonStore.getLessonById(props.id)
   if (lesson) {
-    form.value = { ...lesson };
+    form.value = { ...lesson }
   }
 }
 
 const handleSubmit = async () => {
   try {
     if (isEditMode.value) {
-      await lessonStore.updateLesson(props.id, form.value);
+      await lessonStore.updateLesson(props.id, form.value)
     } else {
-      await lessonStore.createLesson(form.value);
+      await lessonStore.createLesson(form.value)
     }
 
     Notify.create({
       type: 'positive',
       message: isEditMode.value ? 'Lição atualizada com sucesso!' : 'Lição criada com sucesso!',
       position: 'top-right'
-    });
+    })
 
-    router.push('/lessons');
-  } catch(error) {
+    router.push('/lessons')
+  } catch (error) {
     Notify.create({
       type: 'negative',
       message: isEditMode.value ? 'Não foi possível atualizar a lição!' : 'Não foi possível criar a lição!',
       position: 'top-right'
-    });
+    })
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

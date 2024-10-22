@@ -10,10 +10,10 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: '/lessons', component: LessonList },
-      { path: '/lessons/:id/edit', component: LessonForm, name: "LessonEdit", props: true },
-      { path: '/lessons/new', component: LessonForm, name: "LessonNew" },
+      { path: '/lessons/:id/edit', component: LessonForm, name: 'LessonEdit', props: true },
+      { path: '/lessons/new', component: LessonForm, name: 'LessonForm' },
       { path: '/lessons/:id/view', component: LessonView },
-      { path: '/contact', component: ContactPage },
+      { path: '/contact', component: ContactPage }
     ]
   },
 

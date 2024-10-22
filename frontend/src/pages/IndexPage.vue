@@ -32,7 +32,7 @@
 
 defineOptions({
   name: 'IndexPage'
-});
+})
 </script>
 
 <style lang="scss" scoped>

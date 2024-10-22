@@ -3,9 +3,9 @@
 </template>
 
 <script setup>
-  defineOptions({
-    name: 'ContactPage'
-  });
+defineOptions({
+  name: 'ContactPage'
+})
 </script>
 
 <style lang="scss" scoped>

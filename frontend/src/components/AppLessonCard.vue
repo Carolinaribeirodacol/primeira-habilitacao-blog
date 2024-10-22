@@ -25,44 +25,44 @@
 <script setup>
 defineOptions({
   name: 'AppLessonCard'
-});
+})
 
 const props = defineProps({
   id: Number,
   image: {
     type: String,
-    default: ""
+    default: ''
   },
   category: {
     type: String,
-    default: ""
+    default: ''
   },
   title: {
     type: String,
-    default: ""
+    default: ''
   },
   description: {
     type: String,
-    default: ""
+    default: ''
   },
   onEdit: Function,
   onDelete: Function,
   onClick: Function
-});
+})
 
 const handleEditClick = (event) => {
-  event.stopPropagation();
-  props.onEdit(props.id);
-};
+  event.stopPropagation()
+  props.onEdit(props.id)
+}
 
 const handleDeleteClick = (event) => {
-  event.stopPropagation();
-  props.onDelete(props.id);
-};
+  event.stopPropagation()
+  props.onDelete(props.id)
+}
 
 const handleClick = () => {
-  props.onClick(props.id);
-};
+  props.onClick(props.id)
+}
 </script>
 
 <style lang="scss" scoped>

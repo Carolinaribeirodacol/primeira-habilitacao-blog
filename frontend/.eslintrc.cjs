@@ -15,6 +15,7 @@ module.exports = {
 
   // Rules order is important, please avoid shuffling them
   extends: [
+    'standard',
     // Base ESLint recommended rules
     // 'eslint:recommended',
 
@@ -27,8 +28,10 @@ module.exports = {
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    'prettier'
+    // 'prettier'
   ],
+
+  ignorePatterns: ['./.next/**/*'],
 
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-files
