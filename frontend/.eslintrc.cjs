@@ -5,7 +5,7 @@ module.exports = {
   root: true,
 
   parserOptions: {
-    ecmaVersion: 2021, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2021 // Allows for the parsing of modern ECMAScript features
   },
 
   env: {
@@ -15,6 +15,7 @@ module.exports = {
 
   // Rules order is important, please avoid shuffling them
   extends: [
+    'standard',
     // Base ESLint recommended rules
     // 'eslint:recommended',
 
@@ -27,18 +28,20 @@ module.exports = {
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    'prettier'
+    // 'prettier'
   ],
+
+  ignorePatterns: ['./.next/**/*'],
 
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-files
     // required to lint *.vue files
-    'vue',
-    
+    'vue'
+
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
     // add it as an extension for your IDE
-    
+
   ],
 
   globals: {
@@ -56,7 +59,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    
+
     'prefer-promise-reject-errors': 'off',
 
     // allow debugger during development only

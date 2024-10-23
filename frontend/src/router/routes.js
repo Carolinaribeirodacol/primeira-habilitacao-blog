@@ -1,9 +1,19 @@
+import ContactPage from 'src/pages/ContactPage.vue'
+import LessonForm from 'src/pages/LessonForm.vue'
+import LessonList from 'src/pages/LessonList.vue'
+import LessonView from 'src/pages/LessonView.vue'
+
 const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', component: () => import('pages/IndexPage.vue') },
+      { path: '/lessons', component: LessonList },
+      { path: '/lessons/:id/edit', component: LessonForm, name: 'LessonEdit', props: true },
+      { path: '/lessons/new', component: LessonForm, name: 'LessonForm' },
+      { path: '/lessons/:id/view', component: LessonView },
+      { path: '/contact', component: ContactPage }
     ]
   },
 
