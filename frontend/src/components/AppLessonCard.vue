@@ -1,20 +1,22 @@
 <template>
-  <div class="card" flat>
-    <div @click="handleClick" class="card__content">
-      <div class="card__actions">
+  <div class="app-lesson-card q-pa-sm rounded-borders hover-shadow cursor-pointer" flat>
+    <div @click="handleClick" class="app-lesson-card__content full-height column justify-between">
+      <div class="flex gutter-xs justify-end">
         <q-btn @click="handleDeleteClick" flat color="negative" icon="delete" padding="xs" size="sm" />
+
         <q-btn @click="handleEditClick" flat color="primary" icon="edit" padding="xs" size="sm" />
       </div>
 
-      <q-img class="card__image" :src="image" alt="card-image" />
+      <q-img class="app-lesson-card__image rounded-borders q-mt-sm full-width" :src="image" alt="foto lição" />
 
-      <div class="card__title">{{ title }}</div>
-      <p class="card__description">
+      <div class="app-lesson-card__title q-mt-xs text-weight-bold overflow-hidden text-truncate">{{ title }}</div>
+
+      <p class="app-lesson-card__description q-mt-xs text-caption text-grey overflow-hidden ellipsis-3">
         {{ description }}
       </p>
 
       <div>
-        <q-badge outline class="card__badge" color="blue">
+        <q-badge outline class="app-lesson-card__badge" color="blue">
           {{ category }}
         </q-badge>
       </div>
@@ -23,95 +25,76 @@
 </template>
 
 <script setup>
-defineOptions({
-  name: 'AppLessonCard'
-})
+import { useRouter } from 'vue-router'
+defineOptions({ name: 'AppLessonCard' })
+
+const router = useRouter()
 
 const props = defineProps({
-  id: Number,
+  id: {
+    type: Number,
+    default: 1
+  },
+
   image: {
     type: String,
     default: ''
   },
+
   category: {
     type: String,
     default: ''
   },
+
   title: {
     type: String,
     default: ''
   },
+
   description: {
     type: String,
     default: ''
   },
-  onEdit: Function,
-  onDelete: Function,
-  onClick: Function
+
+  delete: {
+    type: Function,
+    default: () => {}
+  }
 })
 
-const handleEditClick = (event) => {
-  event.stopPropagation()
-  props.onEdit(props.id)
+function handleEditClick () {
+  router.push(`/lessons/${props.id}/edit`)
 }
 
-const handleDeleteClick = (event) => {
+function handleDeleteClick (event) {
   event.stopPropagation()
-  props.onDelete(props.id)
+  props.delete(props.id)
 }
 
-const handleClick = () => {
-  props.onClick(props.id)
+function handleClick () {
+  router.push(`/lessons/${props.id}/view`)
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
+<style lang="scss">
+.app-lesson-card {
   transition: transform 0.3s, box-shadow 0.3s;
-  border-radius: 1rem;
   border: 1px solid #151F30;
-  cursor: pointer;
-  padding: 0.8rem;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  &__actions {
-    display: flex;
-    justify-content: flex-end;
   }
 
   &__image {
-    width: 100%;
-    border-radius: 0.5rem;
     height: 120px;
   }
 
   &__title {
-    font-weight: bold;
-    color: #151F30;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: $indigo-10;
   }
 
   &__description {
-    font-size: 0.6rem;
-    height: 40px;
-    color: gray;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    height: 60px;
   }
 }
 </style>

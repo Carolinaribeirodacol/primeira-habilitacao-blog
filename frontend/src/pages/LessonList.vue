@@ -6,7 +6,7 @@
     </div>
 
     <div class="lessons__cards">
-      <app-lesson-card
+      <AppLessonCard
         v-for="lesson in lessons"
         :key="lesson.id"
         :id="lesson.id"
@@ -14,14 +14,12 @@
         :title="lesson.title"
         :category="lesson.category"
         :description="lesson.description"
-        :onEdit="goToEditLessonPage"
-        :onDelete="() => deleteCard(lesson.id)"
-        :onClick="goToViewPage"
+        :delete="() => deleteCard(lesson.id)"
         class="lessons__card"
       />
     </div>
 
-    <AppQaDialog />
+    <AppDialog />
   </q-page>
 </template>
 
@@ -32,11 +30,9 @@ import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import AppLessonCard from '../components/AppLessonCard.vue'
-import AppQaDialog from '../components/AppQaDialog.vue'
+import AppDialog from '../components/AppDialog.vue'
 
-defineOptions({
-  name: 'LessonList'
-})
+defineOptions({ name: 'LessonList' })
 
 const lessonStore = useLessonStore()
 const lessons = computed(() => lessonStore.lessons)
@@ -46,14 +42,6 @@ onMounted(() => {
 })
 
 const router = useRouter()
-
-const goToEditLessonPage = (id) => {
-  router.push(`/lessons/${id}/edit`)
-}
-
-const goToViewPage = (id) => {
-  router.push(`/lessons/${id}/view`)
-}
 
 const goToCreatePage = () => {
   router.push('/lessons/new')
@@ -77,7 +65,6 @@ const deleteCard = (id) => {
             position: 'top-right'
           })
         } catch (error) {
-          console.log(error)
           Notify.create({
             type: 'negative',
             message: 'Não foi possível deletar a lição!',

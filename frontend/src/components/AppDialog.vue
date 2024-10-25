@@ -18,7 +18,7 @@
 import { useDialogStore } from 'src/stores/dialogStore'
 
 defineOptions({
-  name: 'AppQaDialog'
+  name: 'AppDialog'
 })
 
 const dialogStore = useDialogStore()
