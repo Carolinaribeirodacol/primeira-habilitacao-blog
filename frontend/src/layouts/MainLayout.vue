@@ -20,18 +20,19 @@
       :width="220"
       :breakpoint="400"
     >
-      <q-list class="layout__list">
-        <div class="layout__logo">
+      <q-list class="layout__list q-mt-md align-center">
+        <div class="layout__logo flex justify-center">
           <router-link to="/">
             <img
               alt="logo"
               src="~assets/logo.svg"
               style="width: 100px; height: 100px"
+              class="m-0 p-0 block"
             >
           </router-link>
         </div>
         <router-link
-          v-for="link in linksList"
+          v-for="link in linkList"
           :key="link.title"
           :to="link.link"
           class="layout__router-link"
@@ -40,6 +41,7 @@
             <q-item-section avatar>
               <q-icon :name="link.icon" />
             </q-item-section>
+
             <q-item-section>
               <q-item-label>{{ link.title }}</q-item-label>
             </q-item-section>
@@ -63,11 +65,9 @@
 <script setup>
 import { ref } from 'vue'
 
-defineOptions({
-  name: 'MainLayout'
-})
+defineOptions({ name: 'MainLayout' })
 
-const linksList = [
+const linkList = [
   {
     title: 'Página inicial',
     icon: 'home',
@@ -92,31 +92,15 @@ function toggleLeftDrawer () {
 }
 </script>
 
-<style lang="scss" scoped>
-  .layout {
-    &__logo {
-      display: flex;
-      justify-content: center;
-    }
-
-    &__list {
-      padding-top: 1rem;
-      align-items: center;
-    }
-
-    &__header {
-      background-color: #103778;
-    }
-
-    &__router-link {
-      text-decoration: none;
-      color: #103778;
-    }
-
-    img {
-      display: block;
-      margin: 0;
-      padding: 0;
-    }
+<style lang="scss">
+.layout {
+  &__header {
+    background-color: $indigo-10;
   }
+
+  &__router-link {
+    text-decoration: none;
+    color: $indigo-10;
+  }
+}
 </style>

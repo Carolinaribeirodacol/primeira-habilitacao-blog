@@ -1,16 +1,19 @@
 <template>
-  <q-page class="lesson" v-if="lesson">
+  <q-page class="lesson-view" v-if="lesson">
     <q-img
-      class="lesson__image"
+      class="lesson-view__image full-width"
       :src="lesson.image"
-      alt="lesson-image"
+      alt="lesson-view-image"
     />
-    <div class="lesson__content">
-      <h1 class="lesson__title">{{ lesson.title }}</h1>
+
+    <div class="lesson-view__content q-pa-md">
+      <h1 class="lesson-view__title text-weight-bold text-h5">{{ lesson.title }}</h1>
+
       <p>
         {{ lesson.description }}
       </p>
-      <q-badge outline class="lesson__badge" color="blue">
+
+      <q-badge outline class="lesson-view__badge" color="blue">
         {{ lesson.category }}
       </q-badge>
     </div>
@@ -25,9 +28,7 @@ import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
-defineOptions({
-  name: 'LessonView'
-})
+defineOptions({ name: 'LessonView' })
 
 const route = useRoute()
 const lessonStore = useLessonStore()
@@ -42,27 +43,14 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-  .lesson {
-    &__image {
-      width: 100%;
-      height: 200px;
-    }
-
-    &__content {
-      padding: 1rem;
-    }
-
-    &__title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #103778;
-      margin: 0;
-    }
-
-    &__badge {
-      margin-top: auto;
-      align-self: flex-start;
-    }
+<style lang="scss">
+.lesson-view {
+  &__image {
+    height: 200px;
   }
+
+  &__title {
+    color: $indigo-10;
+  }
+}
 </style>

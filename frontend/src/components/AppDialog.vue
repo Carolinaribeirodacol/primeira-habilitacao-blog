@@ -17,9 +17,7 @@
 <script setup>
 import { useDialogStore } from 'src/stores/dialogStore'
 
-defineOptions({
-  name: 'AppDialog'
-})
+defineOptions({ name: 'AppDialog' })
 
 const dialogStore = useDialogStore()
 </script>

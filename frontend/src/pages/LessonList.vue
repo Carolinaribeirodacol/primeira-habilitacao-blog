@@ -1,11 +1,11 @@
 <template>
-  <q-page padding class="lessons">
-    <div class="lessons__header">
-      <h3 class="lessons__title">Todas as aulas</h3>
+  <q-page padding class="lesson-list">
+    <div class="lesson-list__header">
+      <h3 class="lesson-list__title">Todas as aulas</h3>
       <q-btn :onClick="goToCreatePage" icon="add" label="Nova aula" flat type="submit" color="positive" />
     </div>
 
-    <div class="lessons__cards">
+    <div class="lesson-list__cards row wrap justify-center q-gutter-md">
       <AppLessonCard
         v-for="lesson in lessons"
         :key="lesson.id"
@@ -15,7 +15,7 @@
         :category="lesson.category"
         :description="lesson.description"
         :delete="() => deleteCard(lesson.id)"
-        class="lessons__card"
+        class="lesson-list__card"
       />
     </div>
 
@@ -78,34 +78,26 @@ const deleteCard = (id) => {
 }
 </script>
 
-<style lang="scss" scoped>
-  .lessons {
-
-    &__header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    &__title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #103778;
-    }
-
-    &__cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    &__card {
-      flex: 1 1 calc(25% - 1rem);
-      max-width: 250px;
-      min-width: 200px;
-      min-height: 300px;
-      box-sizing: border-box;
-    }
+<style lang="scss">
+.lesson-list {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #103778;
+  }
+
+  &__card {
+    flex: 1 1 calc(25% - 1rem);
+    max-width: 250px;
+    min-width: 200px;
+    min-height: 300px;
+    box-sizing: border-box;
+  }
+}
 </style>

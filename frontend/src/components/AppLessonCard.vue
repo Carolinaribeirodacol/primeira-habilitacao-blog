@@ -63,7 +63,7 @@ const props = defineProps({
 })
 
 function handleEditClick () {
-  router.push(`/lessons/${props.id}/edit`)
+  router.push({ name: 'LessonEdit', params: { id: props.id } })
 }
 
 function handleDeleteClick (event) {
@@ -72,14 +72,14 @@ function handleDeleteClick (event) {
 }
 
 function handleClick () {
-  router.push(`/lessons/${props.id}/view`)
+  router.push({ name: 'LessonView', params: { id: props.id } })
 }
 </script>
 
 <style lang="scss">
 .app-lesson-card {
   transition: transform 0.3s, box-shadow 0.3s;
-  border: 1px solid #151F30;
+  border: 1px solid $indigo-10;
 
   &:hover {
     transform: translateY(-2px);
