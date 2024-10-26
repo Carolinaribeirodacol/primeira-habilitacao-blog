@@ -14,23 +14,17 @@
         :title="lesson.title"
         :category="lesson.category"
         :description="lesson.description"
-        :delete="() => deleteCard(lesson.id)"
         class="lesson-list__card"
       />
     </div>
-
-    <AppDialog />
   </q-page>
 </template>
 
 <script setup>
-import { Notify } from 'quasar'
-import { useDialogStore } from 'src/stores/dialogStore'
 import { useLessonStore } from 'src/stores/lessonStore'
-import { computed, onMounted, watch } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import AppLessonCard from '../components/AppLessonCard.vue'
-import AppDialog from '../components/AppDialog.vue'
 
 defineOptions({ name: 'LessonList' })
 
@@ -45,36 +39,6 @@ const router = useRouter()
 
 const goToCreatePage = () => {
   router.push('/lessons/new')
-}
-
-const dialogStore = useDialogStore()
-
-const deleteCard = (id) => {
-  dialogStore.openDialog()
-
-  watch(
-    () => dialogStore.confirmed,
-    async (confirmed) => {
-      if (confirmed) {
-        try {
-          await lessonStore.deleteLesson(id)
-
-          Notify.create({
-            type: 'positive',
-            message: 'Lição deletada com sucesso!',
-            position: 'top-right'
-          })
-        } catch (error) {
-          Notify.create({
-            type: 'negative',
-            message: 'Não foi possível deletar a lição!',
-            position: 'top-right'
-          })
-        }
-      }
-    },
-    { immediate: false }
-  )
 }
 </script>
 
