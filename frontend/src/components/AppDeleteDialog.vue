@@ -27,7 +27,7 @@ defineOptions({ name: 'AppDeleteDialog' })
 defineProps({
   lessonId: {
     type: Number,
-    default: 1
+    default: null
   }
 })
 
