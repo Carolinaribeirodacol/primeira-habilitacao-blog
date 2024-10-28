@@ -53,7 +53,7 @@ const goToCreatePage = () => {
   &__title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #103778;
+    color: $indigo-10;
   }
 
   &__card {

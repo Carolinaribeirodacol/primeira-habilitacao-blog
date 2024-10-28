@@ -12,14 +12,21 @@
         class="lesson-page__uploader q-my-md full-width"
       />
 
-      <q-select outlined v-model="form.category" :options="categories" label="Categoria" required />
+      <q-select
+        outlined
+        v-model="form.category"
+        :options="categories"
+        label="Categoria"
+        required
+        class="q-my-md"
+      />
 
       <q-editor outlined v-model="form.description" label="Descrição" />
 
       <div class="lesson-page__buttons q-mt-md">
-        <q-btn label="Salvar" type="submit" color="primary" padding="md" size=md />
+        <q-btn label="Salvar" type="submit" color="primary" size=md />
 
-        <q-btn v-if="isEditMode" label="Deletar" color="negative" @click="confirmDelete" padding="md" size=md />
+        <q-btn v-if="isEditMode" label="Deletar" color="negative" @click="confirmDelete" size=md />
       </div>
     </q-form>
   </q-page>
@@ -99,10 +106,6 @@ async function submit () {
 .lesson-page {
   &__form {
     width: 80%;
-
-    .row {
-      margin-bottom: 1rem;
-    }
   }
 
   &__buttons button:first-child {

@@ -43,7 +43,7 @@ async function deleteCard (lessonId) {
       message: 'Lição deletada com sucesso!',
       position: 'top-right'
     })
-  } catch (error) {
+  } catch {
     Notify.create({
       type: 'negative',
       message: 'Não foi possível deletar a lição!',
