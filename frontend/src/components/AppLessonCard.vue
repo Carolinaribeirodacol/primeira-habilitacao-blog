@@ -1,117 +1,93 @@
 <template>
-  <div class="card" flat>
-    <div @click="handleClick" class="card__content">
-      <div class="card__actions">
-        <q-btn @click="handleDeleteClick" flat color="negative" icon="delete" padding="xs" size="sm" />
-        <q-btn @click="handleEditClick" flat color="primary" icon="edit" padding="xs" size="sm" />
+  <div class="app-lesson-card q-pa-sm rounded-borders hover-shadow cursor-pointer" flat>
+    <div class="app-lesson-card__content full-height column justify-between">
+      <div class="flex q-gutter-xs justify-end">
+        <AppDeleteDialog :lessonId="id" />
+
+        <q-btn @click="editClick" flat color="primary" icon="edit" padding="xs" size="sm" />
       </div>
 
-      <q-img class="card__image" :src="image" alt="card-image" />
+      <div @click="viewClick">
+        <q-img class="app-lesson-card__image rounded-borders q-mt-sm full-width" :src="image" alt="foto lição" />
 
-      <div class="card__title">{{ title }}</div>
-      <p class="card__description">
-        {{ description }}
-      </p>
+        <div class="app-lesson-card__title q-mt-xs text-weight-bold overflow-hidden text-truncate">{{ title }}</div>
 
-      <div>
-        <q-badge outline class="card__badge" color="blue">
-          {{ category }}
-        </q-badge>
+        <p class="app-lesson-card__description q-mt-xs text-caption text-grey overflow-hidden ellipsis-3">
+          {{ description }}
+        </p>
+
+        <div>
+          <q-badge outline class="app-lesson-card__badge" color="blue">
+            {{ category }}
+          </q-badge>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-defineOptions({
-  name: 'AppLessonCard'
-})
+import { useRouter } from 'vue-router'
+import AppDeleteDialog from './AppDeleteDialog.vue'
+defineOptions({ name: 'AppLessonCard' })
+
+const router = useRouter()
 
 const props = defineProps({
-  id: Number,
+  id: {
+    type: Number,
+    default: 1
+  },
+
   image: {
     type: String,
     default: ''
   },
+
   category: {
     type: String,
     default: ''
   },
+
   title: {
     type: String,
     default: ''
   },
+
   description: {
     type: String,
     default: ''
-  },
-  onEdit: Function,
-  onDelete: Function,
-  onClick: Function
+  }
 })
 
-const handleEditClick = (event) => {
-  event.stopPropagation()
-  props.onEdit(props.id)
+function editClick () {
+  router.push({ name: 'LessonEdit', params: { id: props.id } })
 }
 
-const handleDeleteClick = (event) => {
-  event.stopPropagation()
-  props.onDelete(props.id)
-}
-
-const handleClick = () => {
-  props.onClick(props.id)
+function viewClick () {
+  router.push({ name: 'LessonView', params: { id: props.id } })
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
+<style lang="scss">
+.app-lesson-card {
   transition: transform 0.3s, box-shadow 0.3s;
-  border-radius: 1rem;
-  border: 1px solid #151F30;
-  cursor: pointer;
-  padding: 0.8rem;
+  border: 1px solid $indigo-10;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  &__actions {
-    display: flex;
-    justify-content: flex-end;
   }
 
   &__image {
-    width: 100%;
-    border-radius: 0.5rem;
     height: 120px;
   }
 
   &__title {
-    font-weight: bold;
-    color: #151F30;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: $indigo-10;
   }
 
   &__description {
-    font-size: 0.6rem;
-    height: 40px;
-    color: gray;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    height: 60px;
   }
 }
 </style>
