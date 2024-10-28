@@ -35,7 +35,7 @@
 <script setup>
 import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
 defineOptions({ name: 'LessonForm' })
@@ -43,7 +43,7 @@ defineOptions({ name: 'LessonForm' })
 const props = defineProps({
   id: {
     type: Number,
-    default: 1
+    default: null
   }
 })
 
@@ -72,12 +72,22 @@ function uploadFile (files) {
 
 const isEditMode = computed(() => !!props.id)
 
-if (isEditMode.value) {
-  const lesson = lessonStore.getLessonById(props.id)
-  if (lesson) {
-    form.value = { ...lesson }
+const lessonForm = computed(() => {
+  if (isEditMode.value) {
+    const lesson = lessonStore.getLessonById(props.id)
+    return lesson ? { ...lesson } : {}
   }
-}
+  return {
+    title: '',
+    image: '',
+    category: '',
+    description: ''
+  }
+})
+
+watch(lessonForm, (newVal) => {
+  form.value = { ...newVal }
+}, { immediate: true })
 
 async function submit () {
   try {
@@ -91,7 +101,7 @@ async function submit () {
       position: 'top-right'
     })
 
-    router.push({ name: 'LessonsList' })
+    router.push({ name: 'LessonList' })
   } catch {
     Notify.create({
       type: 'negative',

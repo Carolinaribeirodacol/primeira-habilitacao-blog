@@ -36,7 +36,7 @@ const router = useRouter()
 const props = defineProps({
   id: {
     type: Number,
-    default: 1
+    default: null
   },
 
   image: {
