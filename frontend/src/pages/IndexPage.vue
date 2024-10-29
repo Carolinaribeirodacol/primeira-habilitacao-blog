@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="home flex justify-center">
+  <q-page padding class="page-home flex justify-center">
     <div class="home__image">
       <img
         alt="achievement"

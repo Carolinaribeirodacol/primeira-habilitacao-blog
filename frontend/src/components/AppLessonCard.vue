@@ -2,7 +2,7 @@
   <div class="app-lesson-card q-pa-sm rounded-borders hover-shadow cursor-pointer" flat>
     <div class="app-lesson-card__content full-height column justify-between">
       <div class="flex q-gutter-xs justify-end">
-        <AppDeleteDialog :lessonId="id" />
+        <app-delete-dialog :lessonId="id" />
 
         <q-btn @click="goToEdit" flat color="primary" icon="edit" padding="xs" size="sm" />
       </div>
@@ -16,11 +16,9 @@
           {{ description }}
         </p>
 
-        <div>
-          <q-badge outline class="app-lesson-card__badge" color="blue">
-            {{ category }}
-          </q-badge>
-        </div>
+        <q-badge outline class="app-lesson-card__badge" color="blue">
+          {{ category }}
+        </q-badge>
       </div>
     </div>
   </div>

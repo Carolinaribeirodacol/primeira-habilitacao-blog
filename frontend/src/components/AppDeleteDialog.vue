@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-btn @click="confirm = true" flat color="negative" icon="delete" padding="xs" size="sm" />
+    <q-btn @click="confirm" flat color="negative" icon="delete" padding="xs" size="sm" />
 
-    <q-dialog v-model="confirm" persistent>
+    <q-dialog v-model="showDialog" persistent>
       <q-card>
         <q-card-section class="row items-center">
           <q-icon name="warning" color="warning" size="4rem" />
@@ -34,8 +34,12 @@ defineProps({
   }
 })
 
-const confirm = ref(false)
+const showDialog = ref(false)
 const lessonStore = useLessonStore()
+
+function confirm () {
+  showDialog.value = true
+}
 
 async function deleteCard (lessonId) {
   try {
@@ -54,5 +58,4 @@ async function deleteCard (lessonId) {
     })
   }
 }
-
 </script>

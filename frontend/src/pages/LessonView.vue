@@ -1,26 +1,26 @@
 <template>
-  <q-page class="lesson-view" v-if="lesson">
+  <q-page class="page-page-lesson-view" v-if="lessonValues">
     <q-img
-      class="lesson-view__image full-width"
-      :src="lesson.image"
-      alt="lesson-view-image"
+      class="page-lesson-view__image full-width"
+      :src="lessonValues.image"
+      alt="page-lesson-view-image"
     />
 
-    <div class="lesson-view__content q-pa-md">
-      <h1 class="lesson-view__title text-indigo-10 text-weight-bold text-h5">{{ lesson.title }}</h1>
+    <div class="page-lesson-view__content q-pa-md">
+      <h1 class="page-lesson-view__title text-indigo-10 text-weight-bold text-h5">{{ lessonValues.title }}</h1>
 
       <p>
-        {{ lesson.description }}
+        {{ lessonValues.description }}
       </p>
 
-      <q-badge outline class="lesson-view__badge" color="blue">
-        {{ lesson.category }}
+      <q-badge outline class="page-lesson-view__badge" color="blue">
+        {{ lessonValues.category }}
       </q-badge>
     </div>
   </q-page>
 
   <div v-else>
-    <AppLoading />
+    <app-loading />
   </div>
 </template>
 
@@ -35,17 +35,13 @@ const route = useRoute()
 const lessonStore = useLessonStore()
 
 const lessonId = computed(() => route.params.id)
-const lesson = computed(() => lessonStore.getLessonById(lessonId.value))
+const lessonValues = computed(() => lessonStore.getLessonById(lessonId.value))
 
-onMounted(() => {
-  if (!lesson.value) {
-    lessonStore.fetchLessonById(lessonId.value)
-  }
-})
+onMounted(() => { lessonStore.getLessonById(lessonId.value) })
 </script>
 
 <style lang="scss">
-.lesson-view {
+.page-lesson-view {
   &__image {
     height: 200px;
   }

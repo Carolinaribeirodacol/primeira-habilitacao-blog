@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="lesson-page">
-    <q-form class="lesson-page__form" @submit="submit">
+  <q-page padding class="page-lesson">
+    <q-form class="page-lesson__form" @submit="submit">
       <q-input outlined v-model="form.title" label="Título" required />
 
       <q-uploader
@@ -9,7 +9,7 @@
         @added="uploadFile"
         :max-files="1"
         outlined
-        class="lesson-page__uploader q-my-md full-width"
+        class="page-lesson__uploader q-my-md full-width"
       />
 
       <q-select
@@ -23,7 +23,7 @@
 
       <q-editor outlined v-model="form.description" label="Descrição" />
 
-      <div class="lesson-page__buttons q-mt-md row q-col-gutter-md">
+      <div class="page-lesson__buttons q-mt-md row q-col-gutter-md">
         <div>
           <q-btn label="Salvar" type="submit" color="primary" size="md" />
         </div>
@@ -110,7 +110,7 @@ async function submit () {
 </script>
 
 <style lang="scss">
-.lesson-page {
+.page-lesson {
   &__form {
     width: 80%;
   }
