@@ -23,10 +23,14 @@
 
       <q-editor outlined v-model="form.description" label="Descrição" />
 
-      <div class="lesson-page__buttons q-mt-md">
-        <q-btn label="Salvar" type="submit" color="primary" size=md />
+      <div class="lesson-page__buttons q-mt-md row q-col-gutter-md">
+        <div>
+          <q-btn label="Salvar" type="submit" color="primary" size="md" />
+        </div>
 
-        <q-btn v-if="isEditMode" label="Deletar" color="negative" @click="confirmDelete" size=md />
+        <div>
+          <q-btn v-if="isEditMode" label="Deletar" color="negative" size="md" />
+        </div>
       </div>
     </q-form>
   </q-page>
@@ -36,19 +40,13 @@
 import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 defineOptions({ name: 'LessonForm' })
 
-const props = defineProps({
-  id: {
-    type: Number,
-    default: null
-  }
-})
-
 const lessonStore = useLessonStore()
 const router = useRouter()
+const route = useRoute()
 
 const form = ref({
   title: '',
@@ -57,42 +55,41 @@ const form = ref({
   description: ''
 })
 
-const categories = (['legislação de trânsito', 'direção defensiva', 'primeiros socorros'])
+const categories = ['legislação de trânsito', 'direção defensiva', 'primeiros socorros']
+const { id } = route.params
+const isEditMode = computed(() => !!id)
+
+const lessonForm = computed(() => {
+  if (isEditMode.value) {
+    const lesson = lessonStore.getLessonById(id)
+    return lesson ? { ...lesson } : {}
+  }
+  return form
+})
+
+watch(lessonForm, (newVal) => {
+  if (isEditMode.value) {
+    form.value = { ...newVal }
+  }
+}, { immediate: true })
 
 function uploadFile (files) {
   const file = files[0]
 
   // nativo do javascript -> lê o conteúdo do arquivo para salvar como url
   const reader = new FileReader()
+
   reader.readAsDataURL(file)
+
   reader.onload = () => {
     form.value.image = reader.result
   }
 }
 
-const isEditMode = computed(() => !!props.id)
-
-const lessonForm = computed(() => {
-  if (isEditMode.value) {
-    const lesson = lessonStore.getLessonById(props.id)
-    return lesson ? { ...lesson } : {}
-  }
-  return {
-    title: '',
-    image: '',
-    category: '',
-    description: ''
-  }
-})
-
-watch(lessonForm, (newVal) => {
-  form.value = { ...newVal }
-}, { immediate: true })
-
 async function submit () {
   try {
     isEditMode.value
-      ? await lessonStore.updateLesson(props.id, form.value)
+      ? await lessonStore.updateLesson(id, form.value)
       : await lessonStore.createLesson(form.value)
 
     Notify.create({
@@ -116,10 +113,6 @@ async function submit () {
 .lesson-page {
   &__form {
     width: 80%;
-  }
-
-  &__buttons button:first-child {
-    margin-right: 1rem;
   }
 }
 </style>

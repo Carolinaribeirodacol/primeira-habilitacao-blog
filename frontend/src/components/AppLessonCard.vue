@@ -4,13 +4,13 @@
       <div class="flex q-gutter-xs justify-end">
         <AppDeleteDialog :lessonId="id" />
 
-        <q-btn @click="editClick" flat color="primary" icon="edit" padding="xs" size="sm" />
+        <q-btn @click="goToEdit" flat color="primary" icon="edit" padding="xs" size="sm" />
       </div>
 
-      <div @click="viewClick">
-        <q-img class="app-lesson-card__image rounded-borders q-mt-sm full-width" :src="image" alt="foto lição" />
+      <div @click="goToView">
+        <q-img class="app-lesson-card__image rounded-borders q-mt-sm full-width" :src="image" :alt="title" />
 
-        <div class="app-lesson-card__title q-mt-xs text-weight-bold overflow-hidden text-truncate">{{ title }}</div>
+        <div class="app-lesson-card__title text-indigo-10 q-mt-xs text-weight-bold overflow-hidden text-truncate">{{ title }}</div>
 
         <p class="app-lesson-card__description q-mt-xs text-caption text-grey overflow-hidden ellipsis-3">
           {{ description }}
@@ -29,14 +29,13 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import AppDeleteDialog from './AppDeleteDialog.vue'
-defineOptions({ name: 'AppLessonCard' })
 
-const router = useRouter()
+defineOptions({ name: 'AppLessonCard' })
 
 const props = defineProps({
   id: {
-    type: Number,
-    default: null
+    type: [Number, String],
+    default: ''
   },
 
   image: {
@@ -60,11 +59,13 @@ const props = defineProps({
   }
 })
 
-function editClick () {
+const router = useRouter()
+
+function goToEdit () {
   router.push({ name: 'LessonEdit', params: { id: props.id } })
 }
 
-function viewClick () {
+function goToView () {
   router.push({ name: 'LessonView', params: { id: props.id } })
 }
 </script>
@@ -80,10 +81,6 @@ function viewClick () {
 
   &__image {
     height: 120px;
-  }
-
-  &__title {
-    color: $indigo-10;
   }
 
   &__description {

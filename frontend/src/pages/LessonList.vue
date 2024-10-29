@@ -1,7 +1,8 @@
 <template>
   <q-page padding class="lesson-list">
-    <div class="lesson-list__header">
-      <h3 class="lesson-list__title">Todas as aulas</h3>
+    <div class="lesson-list__header flex align-center justify-between">
+      <h3 class="lesson-list__title text-h4 text-weight-bold text-indigo-10">Todas as aulas</h3>
+
       <q-btn :onClick="goToCreatePage" icon="add" label="Nova aula" flat type="submit" color="positive" />
     </div>
 
@@ -38,24 +39,12 @@ onMounted(() => {
 const router = useRouter()
 
 const goToCreatePage = () => {
-  router.push('/lessons/new')
+  router.push({ name: 'LessonNew' })
 }
 </script>
 
 <style lang="scss">
 .lesson-list {
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: $indigo-10;
-  }
-
   &__card {
     flex: 1 1 calc(25% - 1rem);
     max-width: 250px;

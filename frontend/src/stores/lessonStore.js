@@ -24,6 +24,7 @@ export const useLessonStore = defineStore('lesson', {
     async createLesson (lessonData) {
       try {
         const { data } = await axios.post('http://localhost:3000/lessons', lessonData)
+
         this.lessons.push(data)
       } catch (error) {
         console.error('Erro ao criar a aula:', error)
