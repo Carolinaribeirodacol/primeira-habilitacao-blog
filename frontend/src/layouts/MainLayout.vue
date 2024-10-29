@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="layout">
-    <q-header elevated class="layout__header">
+    <q-header elevated class="layout__header bg-indigo-10">
       <q-toolbar>
         <q-btn
           flat
@@ -31,11 +31,12 @@
             >
           </router-link>
         </div>
+
         <router-link
           v-for="link in linkList"
           :key="link.title"
           :to="link.link"
-          class="layout__router-link"
+          class="layout__router-link text-indigo-10"
         >
           <q-item clickable>
             <q-item-section avatar>
@@ -94,13 +95,8 @@ function toggleLeftDrawer () {
 
 <style lang="scss">
 .layout {
-  &__header {
-    background-color: $indigo-10;
-  }
-
   &__router-link {
     text-decoration: none;
-    color: $indigo-10;
   }
 }
 </style>

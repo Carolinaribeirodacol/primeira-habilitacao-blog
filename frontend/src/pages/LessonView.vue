@@ -7,7 +7,7 @@
     />
 
     <div class="lesson-view__content q-pa-md">
-      <h1 class="lesson-view__title text-weight-bold text-h5">{{ lesson.title }}</h1>
+      <h1 class="lesson-view__title text-indigo-10 text-weight-bold text-h5">{{ lesson.title }}</h1>
 
       <p>
         {{ lesson.description }}
@@ -18,8 +18,9 @@
       </q-badge>
     </div>
   </q-page>
+
   <div v-else>
-    Carregando aula...
+    <AppLoading />
   </div>
 </template>
 
@@ -47,10 +48,6 @@ onMounted(() => {
 .lesson-view {
   &__image {
     height: 200px;
-  }
-
-  &__title {
-    color: $indigo-10;
   }
 }
 </style>

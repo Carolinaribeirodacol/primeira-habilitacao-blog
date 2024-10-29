@@ -15,8 +15,7 @@ const routes = [
       {
         path: '/lessons/:id/edit',
         component: () => import('src/pages/LessonForm.vue'),
-        name: 'LessonEdit',
-        props: true
+        name: 'LessonEdit'
       },
       {
         path: '/lessons/new',
