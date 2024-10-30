@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="lHh Lpr lFf" class="layout-main">
+    <q-header elevated class="layout-main__header bg-indigo-10">
       <q-toolbar>
         <q-btn
           flat
@@ -10,12 +10,6 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -23,78 +17,72 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      :width="220"
+      :breakpoint="400"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+      <q-list class="layout-main__list q-mt-md align-center">
+        <div class="layout-main__logo flex justify-center">
+          <router-link to="/">
+            <img
+              alt="logo"
+              src="~assets/logo.svg"
+              style="width: 100px; height: 100px"
+              class="layout-main__logo m-0 p-0 block"
+            >
+          </router-link>
+        </div>
 
-        <EssentialLink
-          v-for="link in linksList"
+        <router-link
+          v-for="link in linkList"
           :key="link.title"
-          v-bind="link"
-        />
+          :to="link.link"
+          class="layout-main__router-link text-indigo-10"
+        >
+          <q-item clickable>
+            <q-item-section avatar>
+              <q-icon :name="link.icon" />
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>{{ link.title }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </router-link>
       </q-list>
     </q-drawer>
 
     <q-page-container>
       <router-view />
+      <img
+        alt="achievement"
+        src="~assets/wave.svg"
+        width="100%"
+        height="auto"
+      >
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 
-defineOptions({
-  name: 'MainLayout'
-})
+defineOptions({ name: 'MainLayout' })
 
-const linksList = [
+const linkList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
+    title: 'Página inicial',
+    icon: 'home',
+    link: '/'
+  },
+  {
+    title: 'Todas as aulas',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: '/lessons'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    title: 'Entre em contato',
+    icon: 'phone',
+    link: '/contact'
   }
 ]
 
@@ -104,3 +92,11 @@ function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
+
+<style lang="scss">
+.layout-main {
+  &__router-link {
+    text-decoration: none;
+  }
+}
+</style>
