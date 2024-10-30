@@ -60,11 +60,11 @@ const props = defineProps({
 const router = useRouter()
 
 function goToEdit () {
-  router.push({ name: 'LessonEdit', params: { id: props.id } })
+  router.push({ name: 'LessonsEdit', params: { id: props.id } })
 }
 
 function goToView () {
-  router.push({ name: 'LessonView', params: { id: props.id } })
+  router.push({ name: 'LessonsSingle', params: { id: props.id } })
 }
 </script>
 

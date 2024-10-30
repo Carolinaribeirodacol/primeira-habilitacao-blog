@@ -49,6 +49,7 @@ export const useLessonStore = defineStore('lesson', {
     async updateLesson (id, lessonData) {
       try {
         const { data } = await axios.put(`http://localhost:3000/lessons/${id}`, lessonData)
+
         const index = this.lessons.findIndex(lesson => lesson.id === id)
 
         if (~index) {
@@ -72,6 +73,7 @@ export const useLessonStore = defineStore('lesson', {
     async deleteLesson (id) {
       try {
         await axios.delete(`http://localhost:3000/lessons/${id}`)
+
         this.lessons = this.lessons.filter(lesson => lesson.id !== id)
 
         Notify.create({

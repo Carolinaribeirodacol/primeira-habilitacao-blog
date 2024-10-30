@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="page-lesson">
-    <q-form class="page-lesson__form" @submit="submit">
+  <q-page padding class="page-lessons-form">
+    <q-form class="page-lessons-form__form" @submit="submit">
       <q-input outlined v-model="form.title" label="Título" required />
 
       <q-uploader
@@ -9,7 +9,7 @@
         @added="uploadFile"
         :max-files="1"
         outlined
-        class="page-lesson__uploader q-my-md full-width"
+        class="page-lessons-form__uploader q-my-md full-width"
       />
 
       <q-select
@@ -23,13 +23,13 @@
 
       <q-editor outlined v-model="form.description" label="Descrição" />
 
-      <div class="page-lesson__buttons q-mt-md row q-col-gutter-md">
+      <div class="page-lessons-form__buttons q-mt-sm row q-col-gutter-md">
         <div>
           <q-btn label="Salvar" type="submit" color="primary" size="md" />
         </div>
 
         <div>
-          <q-btn v-if="isEditMode" label="Deletar" color="negative" size="md" />
+          <q-btn to="/" label="Cancelar" color="negative" size="md" />
         </div>
       </div>
     </q-form>
@@ -41,7 +41,7 @@ import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-defineOptions({ name: 'LessonForm' })
+defineOptions({ name: 'LessonsForm' })
 
 const lessonStore = useLessonStore()
 const router = useRouter()
@@ -90,12 +90,12 @@ async function submit () {
     ? await lessonStore.updateLesson(id, form.value)
     : await lessonStore.createLesson(form.value)
 
-  router.push({ name: 'LessonList' })
+  router.push({ name: 'LessonsList' })
 }
 </script>
 
 <style lang="scss">
-.page-lesson {
+.page-lessons-form {
   &__form {
     width: 80%;
   }
