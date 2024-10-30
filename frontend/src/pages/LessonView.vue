@@ -1,5 +1,5 @@
 <template>
-  <q-page class="page-page-lesson-view" v-if="lessonValues">
+  <q-page class="page-lesson-view" v-if="lessonValues">
     <q-img
       class="page-lesson-view__image full-width"
       :src="lessonValues.image"

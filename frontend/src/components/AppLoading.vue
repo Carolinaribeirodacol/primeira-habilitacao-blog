@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="app-loading q-pa-md">
     <q-spinner
       color="primary"
       size="3em"

@@ -37,7 +37,6 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -87,25 +86,11 @@ function uploadFile (files) {
 }
 
 async function submit () {
-  try {
-    isEditMode.value
-      ? await lessonStore.updateLesson(id, form.value)
-      : await lessonStore.createLesson(form.value)
+  isEditMode.value
+    ? await lessonStore.updateLesson(id, form.value)
+    : await lessonStore.createLesson(form.value)
 
-    Notify.create({
-      type: 'positive',
-      message: isEditMode.value ? 'Lição atualizada com sucesso!' : 'Lição criada com sucesso!',
-      position: 'top-right'
-    })
-
-    router.push({ name: 'LessonList' })
-  } catch {
-    Notify.create({
-      type: 'negative',
-      message: isEditMode.value ? 'Não foi possível atualizar a lição!' : 'Não foi possível criar a lição!',
-      position: 'top-right'
-    })
-  }
+  router.push({ name: 'LessonList' })
 }
 </script>
 

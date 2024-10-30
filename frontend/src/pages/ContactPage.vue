@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="contact-page">contact</q-page>
+  <q-page padding>contact</q-page>
 </template>
 
 <script setup>

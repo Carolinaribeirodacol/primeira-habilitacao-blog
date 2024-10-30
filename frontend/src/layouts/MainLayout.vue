@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="layout">
-    <q-header elevated class="layout__header bg-indigo-10">
+  <q-layout view="lHh Lpr lFf" class="layout-main">
+    <q-header elevated class="layout-main__header bg-indigo-10">
       <q-toolbar>
         <q-btn
           flat
@@ -20,14 +20,14 @@
       :width="220"
       :breakpoint="400"
     >
-      <q-list class="layout__list q-mt-md align-center">
-        <div class="layout__logo flex justify-center">
+      <q-list class="layout-main__list q-mt-md align-center">
+        <div class="layout-main__logo flex justify-center">
           <router-link to="/">
             <img
               alt="logo"
               src="~assets/logo.svg"
               style="width: 100px; height: 100px"
-              class="m-0 p-0 block"
+              class="layout-main__logo m-0 p-0 block"
             >
           </router-link>
         </div>
@@ -36,7 +36,7 @@
           v-for="link in linkList"
           :key="link.title"
           :to="link.link"
-          class="layout__router-link text-indigo-10"
+          class="layout-main__router-link text-indigo-10"
         >
           <q-item clickable>
             <q-item-section avatar>
@@ -51,7 +51,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container class="layout__page-container">
+    <q-page-container>
       <router-view />
       <img
         alt="achievement"
@@ -94,7 +94,7 @@ function toggleLeftDrawer () {
 </script>
 
 <style lang="scss">
-.layout {
+.layout-main {
   &__router-link {
     text-decoration: none;
   }

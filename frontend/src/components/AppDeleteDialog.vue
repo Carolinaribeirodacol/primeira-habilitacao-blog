@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
 import { ref } from 'vue'
 
@@ -42,20 +41,6 @@ function confirm () {
 }
 
 async function deleteCard (lessonId) {
-  try {
-    await lessonStore.deleteLesson(lessonId)
-
-    Notify.create({
-      type: 'positive',
-      message: 'Lição deletada com sucesso!',
-      position: 'top-right'
-    })
-  } catch {
-    Notify.create({
-      type: 'negative',
-      message: 'Não foi possível deletar a lição!',
-      position: 'top-right'
-    })
-  }
+  await lessonStore.deleteLesson(lessonId)
 }
 </script>

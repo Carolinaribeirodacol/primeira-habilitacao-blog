@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="page-home flex justify-center">
-    <div class="home__image">
+  <q-page padding class="page-index flex justify-center">
+    <div class="page-index__image">
       <img
         alt="achievement"
         src="~assets/achievement.svg"

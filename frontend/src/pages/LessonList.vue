@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="page-page-lesson-list">
+  <q-page padding class="page-lesson-list">
     <div class="page-lesson-list__header flex align-center justify-between">
       <h3 class="page-lesson-list__title text-h4 text-weight-bold text-indigo-10">Todas as aulas</h3>
 
