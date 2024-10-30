@@ -1,6 +1,6 @@
 <template>
-  <q-page padding class="lesson-page">
-    <q-form class="lesson-page__form" @submit="submit">
+  <q-page padding class="page-lessons-form">
+    <q-form class="page-lessons-form__form" @submit="submit">
       <q-input outlined v-model="form.title" label="Título" required />
 
       <q-uploader
@@ -9,7 +9,7 @@
         @added="uploadFile"
         :max-files="1"
         outlined
-        class="lesson-page__uploader q-my-md full-width"
+        class="page-lessons-form__uploader q-my-md full-width"
       />
 
       <q-select
@@ -23,13 +23,13 @@
 
       <q-editor outlined v-model="form.description" label="Descrição" />
 
-      <div class="lesson-page__buttons q-mt-md row q-col-gutter-md">
+      <div class="page-lessons-form__buttons q-mt-sm row q-col-gutter-md">
         <div>
           <q-btn label="Salvar" type="submit" color="primary" size="md" />
         </div>
 
         <div>
-          <q-btn v-if="isEditMode" label="Deletar" color="negative" size="md" />
+          <q-btn to="/" label="Cancelar" color="negative" size="md" />
         </div>
       </div>
     </q-form>
@@ -37,12 +37,11 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-defineOptions({ name: 'LessonForm' })
+defineOptions({ name: 'LessonsForm' })
 
 const lessonStore = useLessonStore()
 const router = useRouter()
@@ -87,30 +86,16 @@ function uploadFile (files) {
 }
 
 async function submit () {
-  try {
-    isEditMode.value
-      ? await lessonStore.updateLesson(id, form.value)
-      : await lessonStore.createLesson(form.value)
+  isEditMode.value
+    ? await lessonStore.updateLesson(id, form.value)
+    : await lessonStore.createLesson(form.value)
 
-    Notify.create({
-      type: 'positive',
-      message: isEditMode.value ? 'Lição atualizada com sucesso!' : 'Lição criada com sucesso!',
-      position: 'top-right'
-    })
-
-    router.push({ name: 'LessonList' })
-  } catch {
-    Notify.create({
-      type: 'negative',
-      message: isEditMode.value ? 'Não foi possível atualizar a lição!' : 'Não foi possível criar a lição!',
-      position: 'top-right'
-    })
-  }
+  router.push({ name: 'LessonsList' })
 }
 </script>
 
 <style lang="scss">
-.lesson-page {
+.page-lessons-form {
   &__form {
     width: 80%;
   }

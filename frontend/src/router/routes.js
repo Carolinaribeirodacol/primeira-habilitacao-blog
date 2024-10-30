@@ -5,27 +5,28 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('pages/IndexPage.vue')
+        component: () => import('pages/IndexPage.vue'),
+        name: 'IndexPage'
       },
       {
         path: '/lessons',
-        component: () => import('src/pages/LessonList.vue'),
-        name: 'LessonList'
+        component: () => import('src/pages/LessonsList.vue'),
+        name: 'LessonsList'
       },
       {
         path: '/lessons/:id/edit',
-        component: () => import('src/pages/LessonForm.vue'),
-        name: 'LessonEdit'
+        component: () => import('src/pages/LessonsForm.vue'),
+        name: 'LessonsEdit'
       },
       {
         path: '/lessons/new',
-        component: () => import('src/pages/LessonForm.vue'),
-        name: 'LessonNew'
+        component: () => import('src/pages/LessonsForm.vue'),
+        name: 'LessonsNew'
       },
       {
         path: '/lessons/:id/view',
-        component: () => import('src/pages/LessonView.vue'),
-        name: 'LessonView'
+        component: () => import('src/pages/LessonsSingle.vue'),
+        name: 'LessonsSingle'
       },
       {
         path: '/contact',

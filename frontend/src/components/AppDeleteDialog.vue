@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-btn @click="confirm = true" flat color="negative" icon="delete" padding="xs" size="sm" />
+    <q-btn @click="confirm" flat color="negative" icon="delete" padding="xs" size="sm" />
 
-    <q-dialog v-model="confirm" persistent>
+    <q-dialog v-model="showDialog" persistent>
       <q-card>
         <q-card-section class="row items-center">
           <q-icon name="warning" color="warning" size="4rem" />
@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { Notify } from 'quasar'
 import { useLessonStore } from 'src/stores/lessonStore'
 import { ref } from 'vue'
 
@@ -34,25 +33,14 @@ defineProps({
   }
 })
 
-const confirm = ref(false)
+const showDialog = ref(false)
 const lessonStore = useLessonStore()
 
-async function deleteCard (lessonId) {
-  try {
-    await lessonStore.deleteLesson(lessonId)
-
-    Notify.create({
-      type: 'positive',
-      message: 'Lição deletada com sucesso!',
-      position: 'top-right'
-    })
-  } catch {
-    Notify.create({
-      type: 'negative',
-      message: 'Não foi possível deletar a lição!',
-      position: 'top-right'
-    })
-  }
+function confirm () {
+  showDialog.value = true
 }
 
+async function deleteCard (lessonId) {
+  await lessonStore.deleteLesson(lessonId)
+}
 </script>

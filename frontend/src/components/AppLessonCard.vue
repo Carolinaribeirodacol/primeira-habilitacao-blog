@@ -2,7 +2,7 @@
   <div class="app-lesson-card q-pa-sm rounded-borders hover-shadow cursor-pointer" flat>
     <div class="app-lesson-card__content full-height column justify-between">
       <div class="flex q-gutter-xs justify-end">
-        <AppDeleteDialog :lessonId="id" />
+        <app-delete-dialog :lessonId="id" />
 
         <q-btn @click="goToEdit" flat color="primary" icon="edit" padding="xs" size="sm" />
       </div>
@@ -16,11 +16,9 @@
           {{ description }}
         </p>
 
-        <div>
-          <q-badge outline class="app-lesson-card__badge" color="blue">
-            {{ category }}
-          </q-badge>
-        </div>
+        <q-badge outline class="app-lesson-card__badge" color="blue">
+          {{ category }}
+        </q-badge>
       </div>
     </div>
   </div>
@@ -62,11 +60,11 @@ const props = defineProps({
 const router = useRouter()
 
 function goToEdit () {
-  router.push({ name: 'LessonEdit', params: { id: props.id } })
+  router.push({ name: 'LessonsEdit', params: { id: props.id } })
 }
 
 function goToView () {
-  router.push({ name: 'LessonView', params: { id: props.id } })
+  router.push({ name: 'LessonsSingle', params: { id: props.id } })
 }
 </script>
 
